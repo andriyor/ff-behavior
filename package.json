@@ -1,0 +1,13 @@
+{
+  "name": "ff-behavior",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Executable notes on how the ff async flow-control library actually behaves",
+  "scripts": {
+    "test": "node --test test/"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "ff": "0.2.2"
+  }
+}
