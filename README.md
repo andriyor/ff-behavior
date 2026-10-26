@@ -95,10 +95,22 @@ const f = ff(function () {
 - A slot callback called twice: the second value wins and the next step runs once.
 - `f.timeout()` is the only guard against a slot that never calls back. Without it the chain, and anything waiting on it, hangs silently.
 
+## Migrating to async/await
+
+[`skills/migrate-ff/SKILL.md`](skills/migrate-ff/SKILL.md) is a step-by-step guide (and a [Claude Code skill](https://docs.claude.com/en/docs/claude-code/skills)): find each chain, flag the behaviour above that a rewrite would change, convert with the mapping table, and prove it with a test written before the change. [`test/migration.test.js`](test/migration.test.js) checks the main rows of that table: parallel slots, early exit, errors, `slotMulti`, `slotPlain`, `group` and `callbackify`.
+
+To use it as a skill:
+
+```bash
+ln -s "$PWD/skills/migrate-ff" ~/.claude/skills/migrate-ff
+```
+
 ## Layout
 
 - `test/slots.test.js`: slots, `pass`, `group`, `wait`/`slotPlain`/`waitPlain`, context, `next`
 - `test/succeed-fail.test.js`: early exit, and `succeed`/`fail` from async callbacks
 - `test/errors-handlers.test.js`: thrown errors, handler order, uncaught errors, `timeout`
+- `test/migration.test.js`: each ff pattern and its async/await rewrite end the same way
+- `skills/migrate-ff/SKILL.md`: a Claude Code skill for migrating ff code to async/await
 - `fixtures/`: scripts run in a child process for behaviour that ends in an uncaught exception
 - `lib/helpers.js`: `settle()` runs a chain and reports which handler ran, or `"none"` if it hung
