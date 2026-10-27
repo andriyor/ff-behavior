@@ -99,6 +99,8 @@ const f = ff(function () {
 
 [`skills/migrate-ff/SKILL.md`](skills/migrate-ff/SKILL.md) is a step-by-step guide (and a [Claude Code skill](https://docs.claude.com/en/docs/claude-code/skills)): find each chain, flag the behaviour above that a rewrite would change, convert with the mapping table, and prove it with a test written before the change. [`test/migration.test.js`](test/migration.test.js) checks the main rows of that table: parallel slots, early exit, errors, `slotMulti`, `slotPlain`, `group` and `callbackify`.
 
+For a codebase with many chains, [ff2async](https://github.com/andriyor/ff2async) is a codemod that applies the same mapping to every chain it can convert safely and reports the rest; use the skill for what it skips.
+
 To use it as a skill:
 
 ```bash
